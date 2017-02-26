@@ -13,6 +13,8 @@ public class CompanyEO {
 	@Id
 	private Integer companyId;
 	private String companyName;
+	private String ticker;
+	private String etid;
 	private long modifiedOn;
 	
 	@ManyToOne
@@ -32,6 +34,20 @@ public class CompanyEO {
 	}
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
+	}
+	@Column(name="Ticker")
+	public String getTicker() {
+		return ticker;
+	}
+	public void setTicker(String ticker) {
+		this.ticker = ticker;
+	}
+	@Column(name="Etid")
+	public String getEtid() {
+		return etid;
+	}
+	public void setEtid(String etid) {
+		this.etid = etid;
 	}
 	@Column(name="ModifiedOn")
 	public long getModifiedOn() {

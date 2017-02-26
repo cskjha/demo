@@ -8,6 +8,8 @@ ALTER TABLE `master_company` ADD CONSTRAINT `company_industry_IndustryId_FK` FOR
 `stock`.`master_industry`(`IndustryId`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 
+ALTER TABLE `master_company` ADD `Etid` VARCHAR(6) NOT NULL AFTER `IndustryId`, ADD `Ticker` VARCHAR(20) NOT NULL AFTER `Etid`;
+
 
 
 

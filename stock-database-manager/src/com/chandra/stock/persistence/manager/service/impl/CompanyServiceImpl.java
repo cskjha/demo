@@ -33,14 +33,26 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public CompanyEO getCompanyByCompanyId(Integer companyId) {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManager entityManager = new PersistenceManager().getStockPersistenceEntityManager();
+		String queryString = "select company from CompanyEO company where company.companyId=:companyId";
+		Query query = entityManager.createQuery(queryString);  
+		query.setParameter("companyId", companyId);
+		CompanyEO company = (CompanyEO)query.getSingleResult();
+		entityManager.close();
+		return company;
 	}
 
 	@Override
 	public boolean updateCompany(CompanyEO company) {
-		// TODO Auto-generated method stub
-		return false;
+		EntityManager entityManager = new PersistenceManager().getStockPersistenceEntityManager();
+		entityManager.getTransaction().begin();
+		CompanyEO companyEO = entityManager.find(CompanyEO.class, company.getCompanyId());
+		companyEO.setEtid(company.getEtid());
+		companyEO.setTicker(company.getTicker());
+		entityManager.merge(companyEO);
+		entityManager.getTransaction().commit();
+		entityManager.close();
+		return true;
 	}
 
 	@Override
